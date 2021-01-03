@@ -1,0 +1,1 @@
+package pl.coderslab.charity.services;import lombok.RequiredArgsConstructor;import lombok.extern.slf4j.Slf4j;import org.springframework.stereotype.Service;import pl.coderslab.charity.repositories.InstitutionRepository;@Service@Slf4j@RequiredArgsConstructorpublic class InstitutionService {    private final InstitutionRepository institutionRepository;}
