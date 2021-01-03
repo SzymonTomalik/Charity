@@ -1,5 +1,6 @@
-The aim of the project is to create a place where everyone can donate unnecessary things to trusted institutions.
------
+#CharityDonateApp
+###The aim of the project is to create a place where everyone can donate unnecessary things to trusted institutions.
+
 Technologies to use:
 
 Spring Boot
@@ -34,3 +35,9 @@ Required functionalities
 - adding gifts only after logging in,
 - viewing, editing, deleting donations,
 - indication that the gift has been given to someone (archiving).
+____
+## Additional functionalities
+- confirmation of account activation via a message sent to the email provided during registration,
+- support for forgotten passwords,
+- validation of correct input of two identical passwords,
+- validation of administrators service (e.g. no possibility to delete the last existing administrator).
