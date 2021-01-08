@@ -164,8 +164,23 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
       // TODO: get data from inputs and show them in summary
-    }
+      if (this.currentStep === 5) {
+        const categories = [...this.$form.querySelectorAll("[name=categories]:checked")];
+        this.$form.querySelector("#summaryCategories").innerText = categories.join(", ");
+        this.$form.querySelector("#summaryQuantity").innerText = this.$form.querySelector("#quantity")
 
+        const checkedInstitution = this.$form.querySelector("[name=institution]:checked").parentElement.querySelector("div.title").innerText;
+        this.$form.querySelector("#summaryInstitution").innerText = "Dla fundacji: " + checkedInstitution;
+        this.$form.querySelector("#summaryStreet").innerText = this.$form.querySelector("#street").value;
+        this.$form.querySelector("#summaryCity").innerText = this.$form.querySelector("#city").value;
+        this.$form.querySelector("#summaryZipCode").innerText = this.$form.querySelector("#zipCode").value;
+        this.$form.querySelector("#summaryPhoneNumber").innerText = this.$form.querySelector("#phoneNumber").value;
+        this.$form.querySelector("#summaryPickUpDate").innerText = this.$form.querySelector("#pickUpDate").value;
+        this.$form.querySelector("#summaryPickUpTime").innerText = this.$form.querySelector("#pickUpTime").value;
+        this.$form.querySelector("#summaryPickUpComment").innerText = this.$form.querySelector("#pickUpComment").value;
+      }
+
+    }
   }
   const form = document.querySelector(".form--steps");
   if (form !== null) {
