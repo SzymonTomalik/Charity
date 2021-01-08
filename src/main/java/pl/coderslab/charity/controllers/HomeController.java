@@ -21,8 +21,6 @@ public class HomeController {
     public String homeAction(Model model){
 //        chwilowo przekazuje tylko 4 losowe instytucje z bazy
         model.addAttribute("institutions", institutionService.findRandomFourInstitutions());
-//        jeśli trzeba bedzie przekazac wszytskie do widoku to:
-//        model.addAttribute("institutions", institutionService.findAll());
         model.addAttribute("quantity", donationService.countQuantityOfDonatedBags());
         model.addAttribute("allDonations", donationService.countDonations());
 
