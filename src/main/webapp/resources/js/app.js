@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const categories = form.querySelectorAll("[name=categories]:checked ~ .description");
         let checkedCategories = [];
         categories.forEach(category => {checkedCategories.push(category.innerText);});
-        this.$form.querySelector("#summaryCategories").innerText = "gdzie spakowano: " + checkedCategories.join(", ");
+        this.$form.querySelector("#summaryCategories").innerText = "gdzie spakowałeś: " + checkedCategories.join(", ");
         //step 2
         this.$form.querySelector("#summaryQuantity").innerText = this.$form.querySelector("#quantity").value;
         //step 3
