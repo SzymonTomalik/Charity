@@ -165,12 +165,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // TODO: get data from inputs and show them in summary
       if (this.currentStep === 5) {
-        const categories = [...this.$form.querySelectorAll("[name=categories]:checked")];
-        this.$form.querySelector("#summaryCategories").innerText = categories.join(", ");
-        this.$form.querySelector("#summaryQuantity").innerText = this.$form.querySelector("#quantity")
-
+        //step 1
+        const categories = form.querySelectorAll("[name=categories]:checked ~ .description");
+        let checkedCategories = [];
+        categories.forEach(category => {checkedCategories.push(category.innerText);});
+        this.$form.querySelector("#summaryCategories").innerText = "gdzie spakowano: " + checkedCategories.join(", ");
+        //step 2
+        this.$form.querySelector("#summaryQuantity").innerText = this.$form.querySelector("#quantity").value;
+        //step 3
         const checkedInstitution = this.$form.querySelector("[name=institution]:checked").parentElement.querySelector("div.title").innerText;
-        this.$form.querySelector("#summaryInstitution").innerText = "Dla fundacji: " + checkedInstitution;
+        this.$form.querySelector("#summaryInstitution").innerText = checkedInstitution;
+        //step4
         this.$form.querySelector("#summaryStreet").innerText = this.$form.querySelector("#street").value;
         this.$form.querySelector("#summaryCity").innerText = this.$form.querySelector("#city").value;
         this.$form.querySelector("#summaryZipCode").innerText = this.$form.querySelector("#zipCode").value;
