@@ -125,8 +125,11 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$next.forEach(btn => {
         btn.addEventListener("click", e => {
           e.preventDefault();
-          this.currentStep++;
-          this.updateForm();
+          if(this.validateForm()){
+            this.currentStep++;
+            this.updateForm();
+          }
+
         });
       });
 
@@ -163,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$stepInstructions[0].parentElement.parentElement.hidden = this.currentStep >= 5;
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
-      // TODO: get data from inputs and show them in summary
+      // TODO: get data from inputs and show them in summary - DONE
       if (this.currentStep === 5) {
         //step 1
         const categories = form.querySelectorAll("[name=categories]:checked ~ .description");
@@ -184,6 +187,54 @@ document.addEventListener("DOMContentLoaded", function() {
         this.$form.querySelector("#summaryPickUpTime").innerText = this.$form.querySelector("#pickUpTime").value;
         this.$form.querySelector("#summaryPickUpComment").innerText = this.$form.querySelector("#pickUpComment").value;
       }
+
+    }
+
+    validateForm() {
+      if (this.currentStep === 1) {
+        if (!this.validateStep1()) {
+          return false;
+          }
+      }
+      if (this.currentStep === 2) {
+        if (!this.validateStep2()) {
+          return false;
+        }
+      }
+      if (this.currentStep === 3) {
+        if (!this.validateStep3()) {
+          return false;
+        }
+      }
+      if (this.currentStep === 4) {
+        if (!this.validateStep4()) {
+          return false;
+        }
+      }
+      else {
+        this.currentStep++;
+        this.updateForm();
+      }
+    }
+
+    validateStep1() {
+      const categories = form.querySelectorAll("[name=categories]:checked");
+      if (categories.length === 0) {
+        alert("Musisz zaznaczyć co najmniej jedno z pól wyboru");
+        return false
+      }
+      else return true;
+    }
+
+    validateStep2() {
+
+    }
+
+    validateStep3() {
+
+    }
+
+    validateStep4() {
 
     }
   }
