@@ -244,9 +244,74 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     validateStep4() {
+      let street = this.$form.querySelector("#street").value;
+      const regExpStreet = new RegExp("^([A-Za-zżłśŻŁŚ]([A-Za-złśżźćąęóŁŚŻŹĆĄĘÓ])*)(([\s-]?[A-Za-złśżźćąęóŁŚŻŹĆĄĘÓ])*)?(\s[0-9]+[A-za-z]?)([\/m]?[0-9]*)?");
+
+      let city = this.$form.querySelector("#city").value;
+      const regExpCity = new RegExp("^[A-Za-zżłśŻŁŚ]([A-Za-złśżźćąęóŁŚŻŹĆĄĘÓ])*([\s-]?[A-Za-złśżźćąęóŁŚŻŹĆĄĘÓ])");
+
+      let zipCode = this.$form.querySelector("#zipCode").value;
+      const regExpZipCode = new RegExp("^[0-9]{2}-[0-9]{3}");
+
+      let phoneNumber = this.$form.querySelector("#phoneNumber").value;
+
+      let pickUpDate = this.$form.querySelector("#pickUpDate").value;
+      const regExpDate = new RegExp("yyyy-MM-dd")
+
+      let pickUpTime = this.$form.querySelector("#pickUpTime").value;
+      const regExpTime = new RegExp("HH:mm")
+
+      if (street.length === 0 || !regExpStreet.test(street)) {
+        alert("Musisz podać poprawną nazwę ulicy i numer domu/lokalu");
+        return false;
+      }
+      if(city.length === 0 || !regExpCity.test(city)){
+        alert("Musisz podać poprawną nazwę miasta");
+        return false;
+      }
+      if (zipCode.length === 0 || !regExpZipCode.test(zipCode)) {
+        alert("Musisz podać poprawny format kodu pocztowego [00-000]");
+        return false;
+      }
+
+      function isCorrectPhoneNumber(telNumber) {
+        const regExpPhoneNumber1 = new RegExp("^([0-9]{3})([\s-]?[0-9]{3}){2}");
+        const regExpPhoneNumber2 = new RegExp("^00[0-9]{2}([\s-]?[0-9]{3}){3}");
+        const regExpPhoneNumber3 = new RegExp("^\+[0-9]{2}([\s-]?[0-9]{3}){3}");
+        return regExpPhoneNumber1.test(telNumber) || regExpPhoneNumber2.test(telNumber) || regExpPhoneNumber3.test(telNumber);
+      }
+
+      if(phoneNumber.length === 0 || !isCorrectPhoneNumber(phoneNumber)){
+        alert("Musisz podać poprawny numer telefonu");
+        return false;
+      }
+
+      if (pickUpDate.length === 0 || !regExpDate.test(pickUpDate)) {
+        alert("Musisz podać datę w formacie RRRR-MM-DD np.2010-07-13");
+        return false;
+      }else {
+        let today=new Date()
+        if (today>=pickUpDate){
+          alert("Musisz podać datę z przyszłości");
+          return false;
+        }
+      }
+
+      if(pickUpTime.length === 0 || !regExpTime.test(pickUpTime)){
+        alert("Musisz podać czas odbioru w formacie HH:MM np. 14:20");
+        return false;
+      }
+
+
+
+
+
+
+
 
     }
-  }
+}
+
   const form = document.querySelector(".form--steps");
   if (form !== null) {
     new FormSteps(form);
