@@ -220,18 +220,27 @@ document.addEventListener("DOMContentLoaded", function() {
     validateStep1() {
       const categories = form.querySelectorAll("[name=categories]:checked");
       if (categories.length === 0) {
-        alert("Musisz zaznaczyć co najmniej jedno z pól wyboru");
-        return false
+        alert("Musisz zaznaczyć co najmniej jedno z pól wyboru.");
+        return false;
       }
       else return true;
     }
 
     validateStep2() {
-
+      let quantity = this.$form.querySelector("#quantity").value;
+      if (!isFinite(quantity) || quantity.length===0 || quantity<=0) {
+        alert("Musisz wprowadzić poprawną ilośc worków.");
+        return false;
+      }
+      else return true;
     }
 
     validateStep3() {
-
+      if (!this.$form.querySelector("[name=institution]:checked")) {
+        alert("Musisz wybrać adresata z listy.");
+        return false;
+      }
+      else return true;
     }
 
     validateStep4() {
