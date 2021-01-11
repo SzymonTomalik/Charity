@@ -211,10 +211,9 @@ document.addEventListener("DOMContentLoaded", function() {
           return false;
         }
       }
-      else {
-        this.currentStep++;
-        this.updateForm();
-      }
+      this.currentStep++;
+      this.updateForm();
+
     }
 
     validateStep1() {
@@ -245,10 +244,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     validateStep4() {
       let street = this.$form.querySelector("#street").value;
-      const regExpStreet = new RegExp("^([A-Za-zżłśŻŁŚ]([A-Za-złśżźćąęóŁŚŻŹĆĄĘÓ])*)(([\s-]?[A-Za-złśżźćąęóŁŚŻŹĆĄĘÓ])*)?(\s[0-9]+[A-za-z]?)([\/m]?[0-9]*)?");
+      const regExpStreet = new RegExp("^[A-z0-9śŚłŁżŻźŹćĆóÓąĄęĘńŃ]+([\\s-]?[A-z0-9śŚłŁżŻźŹćĆóÓąĄęĘńŃ]+)*\\s([0-9]+([\\/m]?))?\\d+$");
 
       let city = this.$form.querySelector("#city").value;
-      const regExpCity = new RegExp("^[A-Za-zżłśŻŁŚ]([A-Za-złśżźćąęóŁŚŻŹĆĄĘÓ])*([\s-]?[A-Za-złśżźćąęóŁŚŻŹĆĄĘÓ])");
+      const regExpCity = new RegExp("^[A-zśŚłŁżŻźŹćĆóÓńŃ]+([\\s-]?[A-z0-9śŚłŁżŻźŹćĆóÓąĄęĘńŃ]+){0,3}");
 
       let zipCode = this.$form.querySelector("#zipCode").value;
       const regExpZipCode = new RegExp("^[0-9]{2}-[0-9]{3}");
@@ -256,10 +255,13 @@ document.addEventListener("DOMContentLoaded", function() {
       let phoneNumber = this.$form.querySelector("#phoneNumber").value;
 
       let pickUpDate = this.$form.querySelector("#pickUpDate").value;
-      const regExpDate = new RegExp("yyyy-MM-dd")
+      const regExpDate = new RegExp("^2\\d{3}-[0-2]\\d-[0-3]\\d");
 
       let pickUpTime = this.$form.querySelector("#pickUpTime").value;
-      const regExpTime = new RegExp("HH:mm")
+      const regExpTime = new RegExp("^([01]?\\d|2[0-3]):[0-5]\\d");
+
+      let pickUpComment = this.$form.querySelector("#pickUpComment").value;
+
 
       if (street.length === 0 || !regExpStreet.test(street)) {
         alert("Musisz podać poprawną nazwę ulicy i numer domu/lokalu");
@@ -274,41 +276,43 @@ document.addEventListener("DOMContentLoaded", function() {
         return false;
       }
 
-      function isCorrectPhoneNumber(telNumber) {
-        const regExpPhoneNumber1 = new RegExp("^([0-9]{3})([\s-]?[0-9]{3}){2}");
-        const regExpPhoneNumber2 = new RegExp("^00[0-9]{2}([\s-]?[0-9]{3}){3}");
-        const regExpPhoneNumber3 = new RegExp("^\+[0-9]{2}([\s-]?[0-9]{3}){3}");
-        return regExpPhoneNumber1.test(telNumber) || regExpPhoneNumber2.test(telNumber) || regExpPhoneNumber3.test(telNumber);
-      }
-
       if(phoneNumber.length === 0 || !isCorrectPhoneNumber(phoneNumber)){
         alert("Musisz podać poprawny numer telefonu");
         return false;
       }
 
       if (pickUpDate.length === 0 || !regExpDate.test(pickUpDate)) {
-        alert("Musisz podać datę w formacie RRRR-MM-DD np.2010-07-13");
+        alert("Musisz podać datę w formacie rrrr-MM-dd np. 2010-07-13");
         return false;
       }else {
         let today=new Date()
-        if (today>=pickUpDate){
+        if (today>=new Date(pickUpDate)){
           alert("Musisz podać datę z przyszłości");
           return false;
         }
       }
 
       if(pickUpTime.length === 0 || !regExpTime.test(pickUpTime)){
-        alert("Musisz podać czas odbioru w formacie HH:MM np. 14:20");
+        alert("Musisz podać czas odbioru w formacie HH:mm np. 14:20");
         return false;
       }
+      if(pickUpComment.length!==0){
+        if(pickUpComment.includes('>')) {
+          alert("Użyto niedozwolonych znaków");
+          return false;
+        }
+        return true;
+      }
+      return true;
 
 
+      function isCorrectPhoneNumber(telNumber) {
+        const regExpPhoneNumber1 = new RegExp("^([0-9]{3})([\s-]?[0-9]{3}){2}");
+        const regExpPhoneNumber2 = new RegExp("^00[0-9]{2}([\s-]?[0-9]{3}){3}");
+        const regExpPhoneNumber3 = new RegExp("^\\+[0-9]{2}([\s-]?[0-9]{3}){3}");
+        return regExpPhoneNumber1.test(telNumber) || regExpPhoneNumber2.test(telNumber) || regExpPhoneNumber3.test(telNumber);
 
-
-
-
-
-
+      }
     }
 }
 
