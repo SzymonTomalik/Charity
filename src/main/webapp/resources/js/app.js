@@ -129,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function() {
             this.currentStep++;
             this.updateForm();
           }
-
         });
       });
 
@@ -144,7 +143,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Form submit
       this.$form.querySelector("form").addEventListener("submit", e => this.submit(e));
+
+      //Disallow enter
+      form.addEventListener("keydown", e => {
+        if(e.keyCode===13){
+          e.preventDefault();
+          if(this.validateForm()){
+            this.currentStep++;
+            this.updateForm();
+          }
+        }
+      });
     }
+
 
     /**
      * Update form front-end
@@ -153,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function() {
     updateForm() {
       this.$step.innerText = this.currentStep;
 
-      // TODO: Validation
+      // TODO: Validation - DONE
 
       this.slides.forEach(slide => {
         slide.classList.remove("active");
@@ -311,7 +322,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const regExpPhoneNumber2 = new RegExp("^00[0-9]{2}([\s-]?[0-9]{3}){3}");
         const regExpPhoneNumber3 = new RegExp("^\\+[0-9]{2}([\s-]?[0-9]{3}){3}");
         return regExpPhoneNumber1.test(telNumber) || regExpPhoneNumber2.test(telNumber) || regExpPhoneNumber3.test(telNumber);
-
       }
     }
 }
