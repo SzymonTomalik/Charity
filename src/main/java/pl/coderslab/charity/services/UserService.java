@@ -1,0 +1,1 @@
+package pl.coderslab.charity.services;import lombok.RequiredArgsConstructor;import org.springframework.stereotype.Service;import pl.coderslab.charity.repositories.UserRepository;@Service@RequiredArgsConstructorpublic class UserService {    private final UserRepository userRepository;}
