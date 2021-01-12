@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", function() {
         alert("Musisz zaznaczyć co najmniej jedno z pól wyboru.");
         return false;
       }
-      else return true;
+      return true;
     }
 
     validateStep2() {
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function() {
         alert("Musisz wprowadzić poprawną ilośc worków.");
         return false;
       }
-      else return true;
+      return true;
     }
 
     validateStep3() {
@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", function() {
         alert("Musisz wybrać adresata z listy.");
         return false;
       }
-      else return true;
+      return true;
     }
 
     validateStep4() {
