@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     validateStep1() {
-      const categories = form.querySelectorAll("[name=categories]:checked");
+      const categories = this.$form.querySelectorAll("[name=categories]:checked");
       if (categories.length === 0) {
         alert("Musisz zaznaczyć co najmniej jedno z pól wyboru.");
         return false;
