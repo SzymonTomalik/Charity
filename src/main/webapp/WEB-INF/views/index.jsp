@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <a href="#" class="btn btn--large">Załóż konto</a>
+    <a href="/user/form" class="btn btn--large">Załóż konto</a>
 </section>
 
 <section class="about-us">

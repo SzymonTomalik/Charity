@@ -325,7 +325,6 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
 }
-
   const form = document.querySelector(".form--steps");
   if (form !== null) {
     new FormSteps(form);
