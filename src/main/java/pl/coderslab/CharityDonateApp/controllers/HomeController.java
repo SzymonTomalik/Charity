@@ -21,23 +21,24 @@ public class HomeController {
 
 
     @RequestMapping("/")
-    public String homeAction(Model model){
+    public String homeAction(Model model) {
 //        chwilowo przekazuje tylko 4 losowe instytucje z bazy
         model.addAttribute("institutions", institutionService.findRandomFourInstitutions());
         model.addAttribute("quantity", donationService.countQuantityOfDonatedBags());
         model.addAttribute("allDonations", donationService.countDonations());
-        if (userService.isLogged()) {
-            model.addAttribute("isLogged", true);
-        }
-
         return "index";
     }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String login() {
         if (userService.isLogged()) {
             return "index";
         }
+        return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
         return "login";
     }
 }
