@@ -1,1 +1,9 @@
-package pl.coderslab.CharityDonateApp.repositories;import org.springframework.data.jpa.repository.JpaRepository;import org.springframework.stereotype.Repository;import pl.coderslab.CharityDonateApp.entities.Category;@Repositorypublic interface CategoryRepository extends JpaRepository<Category,Long>{}
+package pl.coderslab.CharityDonateApp.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import pl.coderslab.CharityDonateApp.entities.Category;
+
+@Repository
+public interface CategoryRepository extends JpaRepository<Category,Long>{
+}
